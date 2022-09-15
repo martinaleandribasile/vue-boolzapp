@@ -1,0 +1,127 @@
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 150, 136, 255) 15%, rgba(215, 219, 216, 255) 15%);
+}
+
+.widthsms {
+    width: 280px;
+}
+
+img {
+    width: 100%;
+}
+
+main {
+    padding-right: 100px;
+    padding-left: 100px;
+    height: 85vh;
+    padding-top: 100px;
+}
+
+i:hover {
+    color: black !important;
+}
+
+.avatarimg {
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 !important;
+}
+
+.menu {
+    width: 250px;
+    display: none;
+}
+
+.list-group-item:hover {
+    background-color: rgb(231, 241, 228) !important;
+}
+
+.display {
+    display: inline-block;
+
+}
+
+.menupointer {
+    top: 50px;
+    width: 250px;
+}
+
+li {
+    margin: 8px 0;
+}
+
+.avatarcontainer>img {
+    object-fit: cover;
+}
+
+.font {
+    font-size: 20px;
+}
+
+.fontsmall {
+    font-size: 10px;
+}
+
+.contacts {
+    height: 800px;
+    overflow-y: auto;
+}
+
+
+/* Colori  */
+.bggreen {
+    background-color: #d5f9ba;
+}
+
+.bgwhite {
+    background-color: white;
+}
+
+.bggrey {
+    background-color: #eaeaea;
+}
+
+.bgactive {
+    background-color: darkgrey;
+}
+
+.colorazure {
+    color: #8edafc;
+}
+
+.bgazure {
+    background-color: #8edafc;
+}
+
+.bgbeige {
+    background-color: #f3eeea;
+}
+
+.bglightgrey {
+    background-color: #f1f1f1;
+}
+
+.bgimg {
+    overflow-y: auto;
+    height: 500px;
+    background-image: url(img/mine.jpg)
+}
+
+.circlewhite {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+/* MEDIA */
+@media screen and (max-width:994px) {
+    .iconmain {
+        display: none;
+    }
+}
