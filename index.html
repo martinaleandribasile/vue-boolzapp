@@ -104,6 +104,8 @@
                             </div>
                             <div class="bgimg mx-auto w-100 flex-grow-1 p-5">
                                 <div class="w-100 d-flex flex-column">
+                                    <div class="px-3 bg-white rounded-3 align-self-center text-center border-3">
+                                        {{data[numberValue]}}</div>
                                     <div v-for="(message,index) in contacts[numberValue].messages"
                                         class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "
                                         :class="(message.status == 'received') ? 'bgwhite' : 'bggreen align-self-end' ">

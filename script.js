@@ -11,6 +11,7 @@ const app = new Vue({
         answer: '',
         menuSms: '',
         minutes: [],
+        data: [],
         contacts: [
             {
                 name: 'Michele',
@@ -101,12 +102,12 @@ const app = new Vue({
                 visible: true,
                 messages: [
                     {
-                        date: '10/01/2020 15:30:55',
+                        date: '09/01/2020 15:30:55',
                         message: 'Ricordati di chiamare la nonna',
                         status: 'sent'
                     },
                     {
-                        date: '10/01/2020 15:50:00',
+                        date: '09/01/2020 15:50:00',
                         message: 'Va bene, stasera la sento',
                         status: 'received'
                     }
@@ -140,12 +141,12 @@ const app = new Vue({
                 visible: true,
                 messages: [
                     {
-                        date: '10/01/2020 15:30:55',
+                        date: '18/01/2020 15:30:55',
                         message: 'Fai gli auguri a Martina che è il suo compleanno!',
                         status: 'sent'
                     },
                     {
-                        date: '10/01/2020 15:50:00',
+                        date: '18/01/2020 15:50:00',
                         message: 'Grazie per avermelo ricordato, le scrivo subito!',
                         status: 'received'
                     }
@@ -157,17 +158,17 @@ const app = new Vue({
                 visible: true,
                 messages: [
                     {
-                        date: '10/01/2020 15:30:55',
+                        date: '22/01/2020 15:30:55',
                         message: 'Ciao, andiamo a mangiare la pizza stasera?',
                         status: 'received'
                     },
                     {
-                        date: '10/01/2020 15:50:00',
+                        date: '22/01/2020 15:50:00',
                         message: 'No, l\'ho già mangiata ieri, ordiniamo sushi!',
                         status: 'sent'
                     },
                     {
-                        date: '10/01/2020 15:51:00',
+                        date: '22/01/2020 15:51:00',
                         message: 'OK!!',
                         status: 'received'
                     }
@@ -258,6 +259,14 @@ const app = new Vue({
                 let minute = ''
                 minute += time[0] + ":" + time[1];
                 this.minutes.push(minute)
+
+            })
+        },
+        takeData() {
+            this.contacts.forEach((element, index) => {
+                let datetot = element.messages[0].date.split(' ')
+                let datasing = datetot[0]
+                this.data.push(datasing)
             })
         }
     },
@@ -265,5 +274,6 @@ const app = new Vue({
         this.actualDay = this.getDay()
         this.actualTime = this.getTime()
         this.fixedTime()
+        this.takeData()
     },
 })
