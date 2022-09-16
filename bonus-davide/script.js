@@ -280,7 +280,7 @@ const app = new Vue({
         },
         getRandomNumbers(min, max) {
             const range = max - min + 1;
-            const randomNumber = Math.floor(Math.random() * range + min);
+            const randomNumber = Math.floor(Math.random() * range);
             return randomNumber;
         }
     },
