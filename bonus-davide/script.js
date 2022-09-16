@@ -176,7 +176,7 @@ const app = new Vue({
                 ], newSmsArray: [],
             }
         ],
-        answerDeafult: [
+        answerDef: [
             "Torno Subito",
             "Chiamami",
             "Sono occupata",
@@ -240,9 +240,10 @@ const app = new Vue({
         },
         intervalAnswer() {
             setTimeout(() => {
+                const answerlength = this.answerDef.length
                 this.answer = {
                     date: `${this.actualDay} alle ${this.actualTime}`,
-                    message: this.answerDeafult[this.getRandomNumbers(1, 5)],
+                    message: this.answerDef[this.getRandomNumbers(1, answerlength)],
                     status: "received",
                 }
                 this.contacts[this.numberValue].newSmsArray.push(this.answer);
