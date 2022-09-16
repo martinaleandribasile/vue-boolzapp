@@ -92,14 +92,21 @@
                     </div>
                     <div class="col-8 p-0 h-100">
                         <div class="d-flex flex-column h-100" id="chatSection">
-                            <div v-for="(element,index) in contacts" v-if="showContactClick(index)"
-                                class="bggrey px-4 py-2 d-flex align-items-center">
-                                <div class="avatarimg me-3 ">
-                                    <img :src="'img/avatar' + element.avatar + '.jpg'" alt="">
+                            <div class="d-flex justify-content-between bggrey">
+                                <div v-for="(element,index) in contacts" v-if="showContactClick(index)"
+                                    class="bggrey px-4 py-2 d-flex align-items-center">
+                                    <div class="avatarimg me-3 ">
+                                        <img :src="'img/avatar' + element.avatar + '.jpg'" alt="">
+                                    </div>
+                                    <div>
+                                        <h6>{{element.name}}</h6>
+                                        <p>Ultimo accesso il giorno {{getDay()}} alle ore: {{getTime()}}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h6>{{element.name}}</h6>
-                                    <p>Ultimo accesso il giorno {{getDay()}} alle ore: {{getTime()}}</p>
+                                <div class="bggrey px-4 py-2 d-flex align-items-center">
+                                    <i class="me-3 fas fa-search text-black-50"></i>
+                                    <i class=" me-3 fas fa-paperclip text-black-50"></i>
+                                    <i class="fas fa-ellipsis-v text-black-50 me-2"></i>
                                 </div>
                             </div>
                             <div class="bgimg mx-auto w-100 flex-grow-1 p-5">
@@ -110,12 +117,12 @@
                                         class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "
                                         :class="(message.status == 'received') ? 'bgwhite' : 'bggreen align-self-end' ">
                                         <div class="pt-2 pb-1 m-0 d-flex justify-content-between">{{message.message}}
-                                            <button class="text-black-50 border-0 rounded-5 btnh position-relative">
+                                            <div class="text-black-50 border-0 btnh position-relative">
                                                 <i class="bi bi-arrow-down-short" @click="showMenuSmsGet(index)"></i>
                                                 <div class="border-0 btn btn-light position-absolute positionmenu"
                                                     v-show='index === menuSms' @click="deleteMessage(index)">
                                                     Delete message</div>
-                                            </button>
+                                            </div>
                                         </div>
                                         <div class="ms-auto text-end pb-2 text-black-50 fontsmall m-0">
                                             {{minutes[index]}}
@@ -129,12 +136,12 @@
                                         class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "
                                         :class="(message.status == 'received') ? 'bgwhite' : 'bggreen align-self-end' ">
                                         <div class="pt-2 pb-1 m-0 d-flex justify-content-between">{{message.message}}
-                                            <button class="text-black-50 border-0 rounded-5 btnh position-relative">
+                                            <div class="text-black-50 border-0 btnh position-relative">
                                                 <i class="bi bi-arrow-down-short" @click="showMenuSmsGet(index)"></i>
                                                 <div class="border-0 btn btn-light position-absolute positionmenu"
                                                     v-show='index === menuSms' @click="deleteMessage(index)">
                                                     Delete message</div>
-                                            </button>
+                                            </div>
                                         </div>
                                         <div class="ms-auto text-end pb-2 text-black-50 fontsmall m-0">
                                             {{minutes[index]}}
@@ -147,7 +154,8 @@
                                 <div class="col-12 bgbeige p-3 d-flex align-items-center justify-content-around">
                                     <i class="bi bi-emoji-smile mx-3 font text-black-50 "></i>
                                     <input id="message" class="w-75" placeholder="Scrivi un messaggio" v-model="newSms"
-                                        @keyUp.enter="sendMessage()"></input>
+                                        @keyUp.enter="sendMessage()"><i class="text-black-50 bi bi-send"
+                                        @click="sendMessage()"></i></input>
                                     <i class="fas fa-microphone mx-3 font text-black-50"></i>
                                 </div>
                             </div>
