@@ -75,7 +75,7 @@
                                 placeholder="Cerca o inizia una nuova chat">
                         </div>
                         <div class=" contacts bg-white">
-                            <div class="w-100 d-flex p-3 border border-top-0 border-start-0 border-end-0"
+                            <div class="w-100 d-flex p-3 border border-top-0 border-start-0 border-end-0 cursor"
                                 v-for="(element,i) in contacts" :class="(i==numberValue)? 'bgactive' : ''"
                                 @click="takeIndexValue(i)" v-if="element.visible">
                                 <div class="avatarimg me-3">
@@ -104,13 +104,19 @@
                             </div>
                             <div class="bgimg mx-auto w-100 flex-grow-1 p-5">
                                 <div class="w-100 d-flex flex-column">
-                                    <div v-for="message in contacts[numberValue].messages"
+                                    <div v-for="(message,index) in contacts[numberValue].messages"
                                         class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "
                                         :class="(message.status == 'received') ? 'bgwhite' : 'bggreen align-self-end' ">
-                                        <div class="pt-2 pb-1 m-0 ">{{message.message}}</div>
+                                        <div class="pt-2 pb-1 m-0 d-flex justify-content-between">{{message.message}}
+                                            <button class="text-black-50 border-0 rounded-5 btnh position-relative">
+                                                <i class="bi bi-arrow-down-short" @click="showMenuSmsGet(index)"></i>
+                                                <div class="border-0 btn btn-light position-absolute positionmenu"
+                                                    v-show='index === menuSms' @click="deleteMessage(index)">
+                                                    Delete message</div>
+                                            </button>
+                                        </div>
                                         <div class="ms-auto text-end pb-2 text-black-50 fontsmall m-0">{{message.date}}
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -118,9 +124,8 @@
                             <div>
                                 <div class="col-12 bgbeige p-3 d-flex align-items-center justify-content-around">
                                     <i class="bi bi-emoji-smile mx-3 font text-black-50 "></i>
-                                    <textarea name="message" id="message" cols="90" rows="1"
-                                        placeholder="Scrivi un messaggio" v-model="newSms"
-                                        @keyUp.enter="sendMessage()"></textarea>
+                                    <input id="message" class="w-75" placeholder="Scrivi un messaggio" v-model="newSms"
+                                        @keyUp.enter="sendMessage()"></input>
                                     <i class="fas fa-microphone mx-3 font text-black-50"></i>
                                 </div>
                             </div>

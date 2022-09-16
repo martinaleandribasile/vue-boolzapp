@@ -5,6 +5,10 @@ body {
     background: linear-gradient(rgba(0, 150, 136, 255) 15%, rgba(215, 219, 216, 255) 15%);
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 .widthsms {
     width: 280px;
 }
@@ -72,6 +76,19 @@ li {
     overflow-y: auto;
 }
 
+.btnh {
+    height: 30px;
+}
+
+.positionmenu {
+    width: 200px;
+    top: 50px;
+    right: 0;
+}
+
+.bi-arrow-down-short {
+    font-size: 20px;
+}
 
 /* Colori  */
 .bggreen {
@@ -117,11 +134,4 @@ li {
     height: 50px;
     background-color: white;
     border-radius: 50%;
-}
-
-/* MEDIA */
-@media screen and (max-width:994px) {
-    .iconmain {
-        display: none;
-    }
 }

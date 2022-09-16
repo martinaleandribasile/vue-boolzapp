@@ -8,6 +8,8 @@ const app = new Vue({
         actualDay: "",
         actualTime: "",
         newSms: '',
+        answer: '',
+        menuSms: '',
         contacts: [
             {
                 name: 'Michele',
@@ -172,7 +174,6 @@ const app = new Vue({
             }
         ]
     },
-
     methods: {
         changeMenuClass() {
             if (!this.displayIndex) {
@@ -220,30 +221,37 @@ const app = new Vue({
                 message: this.newSms.trim(),
                 status: "sent",
             }
-            this.contacts[this.numberValue].messages.push(this.newSms)
+            if (this.newSms.message != "") {
+                this.contacts[this.numberValue].messages.push(this.newSms)
+                this.intervalAnswer();
+            }
             this.newSms = '';
-            this.intervalAnswer();
-
         },
         intervalAnswer() {
             setTimeout(() => {
-                this.newSms = {
+                this.answer = {
                     date: `${this.actualDay} alle ${this.actualTime}`,
                     message: "ok",
                     status: "received",
                 }
-                this.contacts[this.numberValue].messages.push(this.newSms);
-                this.newSms = '';
+                this.contacts[this.numberValue].messages.push(this.answer);
+                this.answer = '';
             }, 1000);
         },
-        console() {
-            console.log()
-        }
+        showMenuSmsGet(i) {
+            if (this.menuSms === '') {
+                this.menuSms = i
+            } else {
+                this.menuSms = ''
+            }
+        },
+        deleteMessage(position) {
+            this.contacts[this.numberValue].messages.splice(position, 1)
+            this.menuSms = ""
+        },
     },
     created: function () {
         this.actualDay = this.getDay()
         this.actualTime = this.getTime()
-        this.console()
-
     },
 })
