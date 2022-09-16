@@ -121,6 +121,25 @@
                                             {{minutes[index]}}
                                         </div>
                                     </div>
+                                    <div v-show="contacts[numberValue].newSmsArray.length != 0"
+                                        class="px-3 mt-3 bg-white rounded-3 align-self-center text-center border-3">
+                                        {{actualDay}}
+                                    </div>
+                                    <div v-for="(message,index) in contacts[numberValue].newSmsArray"
+                                        class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "
+                                        :class="(message.status == 'received') ? 'bgwhite' : 'bggreen align-self-end' ">
+                                        <div class="pt-2 pb-1 m-0 d-flex justify-content-between">{{message.message}}
+                                            <button class="text-black-50 border-0 rounded-5 btnh position-relative">
+                                                <i class="bi bi-arrow-down-short" @click="showMenuSmsGet(index)"></i>
+                                                <div class="border-0 btn btn-light position-absolute positionmenu"
+                                                    v-show='index === menuSms' @click="deleteMessage(index)">
+                                                    Delete message</div>
+                                            </button>
+                                        </div>
+                                        <div class="ms-auto text-end pb-2 text-black-50 fontsmall m-0">
+                                            {{minutes[index]}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

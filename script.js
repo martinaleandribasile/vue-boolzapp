@@ -34,6 +34,7 @@ const app = new Vue({
                         status: 'received'
                     }
                 ],
+                newSmsArray: [],
             },
             {
                 name: 'Fabio',
@@ -55,7 +56,7 @@ const app = new Vue({
                         message: 'Mi piacerebbe ma devo andare a fare la spesa.',
                         status: 'sent'
                     }
-                ],
+                ], newSmsArray: [],
             },
             {
                 name: 'Samuele',
@@ -94,7 +95,7 @@ const app = new Vue({
                         message: 'Si, ma preferirei andare al cinema',
                         status: 'received'
                     }
-                ],
+                ], newSmsArray: [],
             },
             {
                 name: 'Alessandro L.',
@@ -111,7 +112,7 @@ const app = new Vue({
                         message: 'Va bene, stasera la sento',
                         status: 'received'
                     }
-                ],
+                ], newSmsArray: [],
             },
             {
                 name: 'Claudia',
@@ -133,7 +134,7 @@ const app = new Vue({
                         message: 'Nessuna nuova, buona nuova',
                         status: 'sent'
                     }
-                ],
+                ], newSmsArray: [],
             },
             {
                 name: 'Federico',
@@ -150,7 +151,7 @@ const app = new Vue({
                         message: 'Grazie per avermelo ricordato, le scrivo subito!',
                         status: 'received'
                     }
-                ],
+                ], newSmsArray: [],
             },
             {
                 name: 'Davide',
@@ -172,7 +173,7 @@ const app = new Vue({
                         message: 'OK!!',
                         status: 'received'
                     }
-                ],
+                ], newSmsArray: [],
             }
         ]
     },
@@ -224,7 +225,7 @@ const app = new Vue({
                 status: "sent",
             }
             if (this.newSms.message != "") {
-                this.contacts[this.numberValue].messages.push(this.newSms)
+                this.contacts[this.numberValue].newSmsArray.push(this.newSms)
                 this.intervalAnswer();
             }
             this.newSms = '';
@@ -236,7 +237,7 @@ const app = new Vue({
                     message: "ok",
                     status: "received",
                 }
-                this.contacts[this.numberValue].messages.push(this.answer);
+                this.contacts[this.numberValue].newSmsArray.push(this.answer);
                 this.answer = '';
             }, 1000);
         },
@@ -273,7 +274,7 @@ const app = new Vue({
     created: function () {
         this.actualDay = this.getDay()
         this.actualTime = this.getTime()
-        this.fixedTime()
-        this.takeData()
+        this.fixedTime();
+        this.takeData();
     },
 })
