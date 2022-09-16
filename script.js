@@ -10,6 +10,7 @@ const app = new Vue({
         newSms: '',
         answer: '',
         menuSms: '',
+        minutes: [],
         contacts: [
             {
                 name: 'Michele',
@@ -249,9 +250,20 @@ const app = new Vue({
             this.contacts[this.numberValue].messages.splice(position, 1)
             this.menuSms = ""
         },
+        fixedTime() {
+            this.contacts[this.numberValue].messages.forEach((mess) => {
+                let datetot = mess.date.split(' ')
+                let orario = datetot[1]
+                let time = orario.split(':');
+                let minute = ''
+                minute += time[0] + ":" + time[1];
+                this.minutes.push(minute)
+            })
+        }
     },
     created: function () {
         this.actualDay = this.getDay()
         this.actualTime = this.getTime()
+        this.fixedTime()
     },
 })
