@@ -185,6 +185,12 @@ const app = new Vue({
         ]
     },
     methods: {
+        scroll() {
+            setTimeout(() => {
+                const messages = document.querySelector(".bgimg");
+                messages.scrollTop = messages.scrollHeight - messages.offsetHeight;
+            }, 1)
+        },
         changeMenuClass() {
             if (!this.displayIndex) {
                 this.display = "display"
@@ -235,10 +241,14 @@ const app = new Vue({
             if (this.newSms.message != "") {
                 this.contacts[this.numberValue].newSmsArray.push(this.newSms)
                 this.intervalAnswer();
+                this.scroll()
             }
             this.newSms = '';
+
         },
         intervalAnswer() {
+            let status = document.getElementById('chengeStatus')
+            status.innerHTML = 'sta scrivendo...'
             setTimeout(() => {
                 const answerlength = this.answerDef.length
                 this.answer = {
@@ -248,7 +258,13 @@ const app = new Vue({
                 }
                 this.contacts[this.numberValue].newSmsArray.push(this.answer);
                 this.answer = '';
+                this.scroll()
             }, 1000);
+            setTimeout(() => { status.innerHTML = 'on-line' }, 1000)
+            setTimeout(() => {
+                status.innerHTML = `Ultimo accesso il ${this.getDay()}, alle ore: ${this.getTime()}`
+            }, 3000)
+
         },
         showMenuSmsGet(i) {
             if (this.menuSms === '') {
@@ -260,6 +276,14 @@ const app = new Vue({
         deleteMessage(position) {
             this.contacts[this.numberValue].messages.splice(position, 1)
             this.menuSms = ""
+        },
+        deleteAllMessages() {
+            this.contacts[this.numberValue].messages.splice(0, this.contacts[this.numberValue].messages.length)
+        },
+        deleteMessFx() {
+            if (this.contacts[this.numberValue].messages.length != 0) {
+                return true
+            }
         },
         fixedTime() {
             this.contacts[this.numberValue].messages.forEach((mess) => {
@@ -284,6 +308,7 @@ const app = new Vue({
             const randomNumber = Math.floor(Math.random() * range);
             return randomNumber;
         }
+
     },
     created: function () {
         this.actualDay = this.getDay()

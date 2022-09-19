@@ -37,27 +37,10 @@
                                 </div>
                                 <h6 class="m-0">Sofia </h6>
                             </div>
-                            <div class="ms-auto iconmain position-relative">
+                            <div class="ms-auto iconmain">
                                 <i class="fas fa-circle-notch text-black-50 me-2"></i>
                                 <i class="bi bi-chat-left-fill text-black-50 me-2"></i>
-                                <i class="fas fa-ellipsis-v text-black-50 me-2" @click="changeMenuClass()"></i>
-                                <div class="position-absolute end-0 menupointer bg-light p-3" :class="display">
-                                    <ul>
-                                        <li>
-                                            <button type="button"
-                                                class="list-group-item list-group-item-action">Messaggi
-                                                Importanti</button>
-                                        </li>
-                                        <li>
-                                            <button type="button" class="list-group-item list-group-item-action">Nuovo
-                                                gruppo</button>
-                                        </li>
-                                        <li>
-                                            <button type="button"
-                                                class="list-group-item list-group-item-action">Impostazioni</button>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <i class="fas fa-ellipsis-v text-black-50 me-2"></i>
                             </div>
                         </div>
                         <div class=" bgazure p-3 d-flex">
@@ -83,8 +66,14 @@
                                 </div>
                                 <div>
                                     <h6>{{element.name}}</h6>
-                                    <p class="m-0">{{element.messages[element.messages.length-1].message}}</p>
-                                    <p class="m-0">{{element.messages[element.messages.length-1].date}}</p>
+                                    <div v-if="element.newSmsArray==''">
+                                        <p class="m-0">{{element.messages[element.messages.length-1].message}}</p>
+                                        <p class="m-0">{{element.messages[element.messages.length-1].date}}</p>
+                                    </div>
+                                    <div v-if="element.newSmsArray!=''">
+                                        <p class="m-0">{{element.newSmsArray[element.newSmsArray.length-1].message}}</p>
+                                        <p class="m-0">{{element.newSmsArray[element.newSmsArray.length-1].date}}</p>
+                                    </div>
                                 </div>
                             </div>
 
@@ -100,34 +89,53 @@
                                     </div>
                                     <div>
                                         <h6>{{element.name}}</h6>
-                                        <p>Ultimo accesso il giorno {{getDay()}} alle ore: {{getTime()}}</p>
+                                        <p id="chengeStatus">Ultimo accesso il giorno {{getDay()}} alle ore:
+                                            {{getTime()}}</p>
                                     </div>
                                 </div>
-                                <div class="bggrey px-4 py-2 d-flex align-items-center">
+                                <div class="bggrey px-4 py-2 d-flex align-items-center position-relative">
                                     <i class="me-3 fas fa-search text-black-50"></i>
                                     <i class=" me-3 fas fa-paperclip text-black-50"></i>
-                                    <i class="fas fa-ellipsis-v text-black-50 me-2"></i>
+                                    <i class="fas fa-ellipsis-v text-black-50 me-2" @click="changeMenuClass()"></i>
+                                    <div class="position-absolute end-0 menupointer bg-light p-3" :class="display">
+                                        <ul>
+                                            <li>
+                                                <button type="button" class="list-group-item list-group-item-action"
+                                                    @click="deleteAllMessages()">Elimina
+                                                    Messaggi</button>
+                                            </li>
+                                            <li>
+                                                <button type="button"
+                                                    class="list-group-item list-group-item-action">Elimina Chat</button>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <div class="bgimg mx-auto w-100 flex-grow-1 p-5">
                                 <div class="w-100 d-flex flex-column">
-                                    <div class="px-3 bg-white rounded-3 align-self-center text-center border-3">
-                                        {{data[numberValue]}}</div>
-                                    <div v-for="(message,index) in contacts[numberValue].messages"
-                                        class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "
-                                        :class="(message.status == 'received') ? 'bgwhite' : 'bggreen align-self-end' ">
-                                        <div class="pt-2 pb-1 m-0 d-flex justify-content-between">{{message.message}}
-                                            <div class="text-black-50 border-0 btnh position-relative">
-                                                <i class="bi bi-arrow-down-short" @click="showMenuSmsGet(index)"></i>
-                                                <div class="border-0 btn btn-light position-absolute positionmenu"
-                                                    v-show='index === menuSms' @click="deleteMessage(index)">
-                                                    Delete message</div>
+                                    <div class="w-100 d-flex flex-column">
+                                        <div class="px-3 bg-white rounded-3 align-self-center text-center border-3">
+                                            {{data[numberValue]}}</div>
+                                        <div v-for="(message,index) in contacts[numberValue].messages"
+                                            class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "
+                                            :class="(message.status == 'received') ? 'bgwhite' : 'bggreen align-self-end' ">
+                                            <div class="pt-2 pb-1 m-0 d-flex justify-content-between">
+                                                {{message.message}}
+                                                <div class="text-black-50 border-0 btnh position-relative">
+                                                    <i class="bi bi-arrow-down-short"
+                                                        @click="showMenuSmsGet(index)"></i>
+                                                    <div class="border-0 btn btn-light position-absolute positionmenu"
+                                                        v-show='index === menuSms' @click="deleteMessage(index)">
+                                                        Delete message</div>
+                                                </div>
+                                            </div>
+                                            <div class="ms-auto text-end pb-2 text-black-50 fontsmall m-0">
+                                                {{minutes[index]}}
                                             </div>
                                         </div>
-                                        <div class="ms-auto text-end pb-2 text-black-50 fontsmall m-0">
-                                            {{minutes[index]}}
-                                        </div>
                                     </div>
+
                                     <div v-show="contacts[numberValue].newSmsArray.length != 0"
                                         class="px-3 mt-3 bg-white rounded-3 align-self-center text-center border-3">
                                         {{actualDay}}
