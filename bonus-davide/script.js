@@ -1,6 +1,9 @@
 const app = new Vue({
     el: "#boolzApp",
     data: {
+        newContactIndex: false,
+        newContactName: '',
+        newContactImg: '',
         adminSearch: "",
         display: "menu",
         displayIndex: false,
@@ -313,7 +316,37 @@ const app = new Vue({
             const range = max - min + 1;
             const randomNumber = Math.floor(Math.random() * range);
             return randomNumber;
-        }
+        },
+        changeNewContactIndex() {
+            this.newContactIndex = !this.newContactIndex
+        },
+        addNewContact() {
+            let avatarimg = this.changeAvatarFemale()
+            let newContact = {
+                name: this.newContactName[0].toUpperCase() + this.newContactName.slice(1),
+                avatar: `_${avatarimg}`,
+                visible: true,
+                messages: '',
+                newSmsArray: []
+            }
+            this.contacts.unshift(newContact)
+            avatarimg = ''
+            this.newContactImg = ''
+            this.newContactName = ''
+            this.newContactIndex = !this.newContactIndex
+        },
+        changeAvatarFemale() {
+            if (this.newContactName[this.newContactName.length - 1] == 'a') {
+                this.newContactImg = 6
+            } else {
+                if (this, newContactImg = 6) {
+                    this.newContactImg++
+                } else {
+                    this.newContactImg
+                }
+
+            } return this.newContactImg
+        },
 
     },
     created: function () {

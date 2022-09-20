@@ -55,7 +55,18 @@
                         <div class=" p-3 d-flex bglightgrey">
                             <span class="px-2 bg-white border"><i class="fas fa-search"></i></span>
                             <input class="w-100 border" v-model="adminSearch" @keyUp="searchConctact()" type="text"
-                                placeholder="Cerca o inizia una nuova chat">
+                                placeholder="Cerca una chat">
+                        </div>
+                        <div class="bgazure d-flex flex-column p-3 gap-3">
+                            <div v-if='!newContactIndex' @click="changeNewContactIndex()" class="btn btn-success">
+                                Aggiungi Contatto</div>
+                            <div class="d-flex flex-column gap-3 " v-if="newContactIndex">
+                                <input type="text" placeholder="Nome contatto" v-model="newContactName">
+                                <input type="text" placeholder="Immagine contatto(inserisci un numero da 1 a 8)"
+                                    v-model="newContactImg">
+                                <div class="btn btn-success w-20 text-center align-self-center"
+                                    @click="addNewContact()">Inserisci</div>
+                            </div>
                         </div>
                         <div class=" contacts bg-white">
                             <div class="w-100 d-flex p-3 border border-top-0 border-start-0 border-end-0 cursor"
