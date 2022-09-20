@@ -279,6 +279,9 @@ const app = new Vue({
         },
         deleteAllMessages() {
             this.contacts[this.numberValue].messages.splice(0, this.contacts[this.numberValue].messages.length)
+            if (this.contacts[this.numberValue].newSmsArray.length != 0) {
+                this.contacts[this.numberValue].newSmsArray.splice(0, this.contacts[this.numberValue].newSmsArray.length)
+            }
         },
         deleteMessFx() {
             if (this.contacts[this.numberValue].messages.length != 0) {
