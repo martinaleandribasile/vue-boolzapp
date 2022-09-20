@@ -66,9 +66,11 @@
                                 </div>
                                 <div>
                                     <h6>{{element.name}}</h6>
-                                    <div v-if="element.newSmsArray==''">
-                                        <p class="m-0">{{element.messages[element.messages.length-1].message}}</p>
-                                        <p class="m-0">{{element.messages[element.messages.length-1].date}}</p>
+                                    <div v-if="element.newSmsArray=='' && element.messages != '' ">
+                                        <p class="m-0">
+                                            {{element.messages[element.messages.length-1].message}}</p>
+                                        <p class="m-0">
+                                            {{element.messages[element.messages.length-1].date}}</p>
                                     </div>
                                     <div v-if="element.newSmsArray!=''">
                                         <p class="m-0">{{element.newSmsArray[element.newSmsArray.length-1].message}}</p>
@@ -101,12 +103,13 @@
                                         <ul>
                                             <li>
                                                 <button type="button" class="list-group-item list-group-item-action"
-                                                    @click="deleteAllMessages()">Elimina
+                                                    @click="deleteAllMessages(), changeMenuClass()">Elimina
                                                     Messaggi</button>
                                             </li>
                                             <li>
-                                                <button type="button"
-                                                    class="list-group-item list-group-item-action">Elimina Chat</button>
+                                                <button type="button" @click='deleteContact(),changeMenuClass() '
+                                                    class="list-group-item  list-group-item-action">Elimina
+                                                    Chat</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -115,7 +118,8 @@
                             <div class="bgimg mx-auto w-100 flex-grow-1 p-5">
                                 <div class="w-100 d-flex flex-column">
                                     <div class="w-100 d-flex flex-column">
-                                        <div class="px-3 bg-white rounded-3 align-self-center text-center border-3">
+                                        <div v-if='contacts[numberValue].messages != ""'
+                                            class="px-3 bg-white rounded-3 align-self-center text-center border-3">
                                             {{data[numberValue]}}</div>
                                         <div v-for="(message,index) in contacts[numberValue].messages"
                                             class=" rounded-3 widthsms px-2 my-3 d-flex flex-column "

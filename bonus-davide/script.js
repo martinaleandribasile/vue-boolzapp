@@ -285,6 +285,9 @@ const app = new Vue({
                 return true
             }
         },
+        deleteContact() {
+            this.contacts.splice(this.numberValue, 1)
+        },
         fixedTime() {
             this.contacts[this.numberValue].messages.forEach((mess) => {
                 let datetot = mess.date.split(' ')
