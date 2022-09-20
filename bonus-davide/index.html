@@ -58,7 +58,8 @@
                                 placeholder="Cerca una chat">
                         </div>
                         <div class="bgazure d-flex flex-column p-3 gap-3">
-                            <div v-if='!newContactIndex' @click="changeNewContactIndex()" class="btn btn-success">
+                            <div v-if='!newContactIndex' @click="changeNewContactIndex()"
+                                class="w-50 align-self-center btn btn-success">
                                 Aggiungi Contatto</div>
                             <div class="d-flex flex-column gap-3 " v-if="newContactIndex">
                                 <input type="text" placeholder="Nome contatto" v-model="newContactName">
